@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vortex Media - Watch Shows Online</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh; /* Full screen height */
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tekst-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .tekst {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .tekst-small {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .top-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .language-btn, .nav-btn, .contact-btn {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background-color 0.3s;
+      margin-right: 10px;
+    }
+
+    .language-btn:hover, .nav-btn:hover, .contact-btn:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .back-to-home {
+      font-size: 20px;
+      margin-top: 30px;
+      display: block;
+      color: white;
+      text-decoration: none;
+      border: 2px solid white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    .back-to-home:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .slika {
+      position: absolute;
+      top: -200px;
+      left: -50px;
+      width: 500px;
+      height: 500px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      overflow: auto;
+      padding-top: 60px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .modal.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background-color: #333;
+      margin: 5% auto;
+      padding: 40px;
+      border: 2px solid #fff;
+      width: 80%;
+      max-width: 600px;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .modal-close {
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus {
+      color: white;
+      text-decoration: none;
+    }
+
+    .modal-button {
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-transform: uppercase;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .modal-button:hover {
+      background-color: #444;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slika -->
+  <img src="Jovanilo.png" class="slika" alt="Jovanilo">
+
+  <div class="tekst-container">
+    <p class="tekst" id="text1">Unlimited movies,<br>and much more to watch!</p>
+    <p class="tekst-small" id="text2">You can log in and watch any time!</p>
+
+    <!-- Top Buttons -->
+    <div class="top-buttons">
+      <button class="language-btn" onclick="switchLanguage()">Switch to Serbian</button>
+      <button class="contact-btn" onclick="openContact()">Contact</button>
+      <button class="nav-btn" onclick="openModal()">About Us</button>
+    </div>
+  </div>
+
+  <!-- Modal for About Us -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h1>About Us</h1>
+      <p>We are passionate about movies and entertainment. Our mission is to bring you unlimited streaming of the best movies and TV shows anytime, anywhere.</p>
+      <button class="modal-button" onclick="goHome()">Home</button>
+    </div>
+  </div>
+
+  <!-- Modal for Contact -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeContact()">&times;</span>
+      <h1>Contact Us</h1>
+      <p>You can reach us at:</p>
+      <a href="mailto:mediavortex669@gmail.com" class="modal-button">Email Us</a>
+    </div>
+  </div>
+
+  <script>
+    let isEnglish = true; // Initial language is English
+
+    // Function to switch languages
+    function switchLanguage() {
+      if (isEnglish) {
+        document.getElementById("text1").innerHTML = "Neograničeni filmovi,<br>i mnogo više za gledanje!";
+        document.getElementById("text2").innerHTML = "Možete se prijaviti i gledati u bilo kojem trenutku!";
+        document.querySelector(".language-btn").innerHTML = "Switch to English";
+      } else {
+        document.getElementById("text1").innerHTML = "Unlimited movies,<br>and much more to watch!";
+        document.getElementById("text2").innerHTML = "You can log in and watch any time!";
+        document.querySelector(".language-btn").innerHTML = "Switch to Serbian";
+      }
+      isEnglish = !isEnglish;
+    }
+
+    // Function to open the About Us modal
+    function openModal() {
+      document.getElementById("myModal").classList.add("show");
+    }
+
+    // Function to close the About Us modal
+    function closeModal() {
+      document.getElementById("myModal").classList.remove("show");
+    }
+
+    // Function to go to the Home page
+    function goHome() {
+      window.location.href = 'index (2).html'; // Redirect to 'index (2).html'
+    }
+
+    // Function to open the Contact modal
+    function openContact() {
+      document.getElementById("contactModal").classList.add("show");
+    }
+
+    // Function to close the Contact modal
+    function closeContact() {
+      document.getElementById("contactModal").classList.remove("show");
+    }
+
+    // When user clicks outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == document.getElementById("myModal")) {
+        closeModal();
+      } else if (event.target == document.getElementById("contactModal")) {
+        closeContact();
+      }
+    }
+  </script>
+
+</body>
+</html>
